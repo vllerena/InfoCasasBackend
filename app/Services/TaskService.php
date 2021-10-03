@@ -12,7 +12,7 @@ class TaskService implements TaskContract
 
     public function filterTasks(Request $request, $quantity = '*')
     {
-        $query = Task::orderBy(TaskAttr::CREATED_AT, 'ASC');
+        $query = Task::orderBy(TaskAttr::CREATED_AT, 'ASC')->filter($request->all());
         if ($quantity == '*')
             return $query->get();
         return $query->paginate($quantity);
